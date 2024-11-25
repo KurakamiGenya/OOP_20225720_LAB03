@@ -1,3 +1,4 @@
+package hust.soict;
 public class ObjectWrapper {
     public Object object;
 
