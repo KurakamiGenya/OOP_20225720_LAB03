@@ -44,6 +44,10 @@ public class DigitalVideoDisc {
 		this.cost = cost;
 	}
 
+	public int getId() {
+		return id;
+	}
+
 	public String getTitle() {
 		return title;
 	}
