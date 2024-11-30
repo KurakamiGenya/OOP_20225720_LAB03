@@ -1,7 +1,7 @@
 package hust.soict.dsai.aims.cart;
 import java.util.ArrayList;
 
-import hust.soict.dsai.aims.disc.DigitalVideoDisc;
+import hust.soict.dsai.aims.media.DigitalVideoDisc;
 
 public class Cart {
     // Maximum number of DVDs allowed in the cart
