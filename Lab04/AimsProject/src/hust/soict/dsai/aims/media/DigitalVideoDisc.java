@@ -17,7 +17,7 @@ public class DigitalVideoDisc extends Disc {
 		this.setTitle(title);
 	}
 
-	// Constructor with title, category, và cost
+	// Constructor with title, category & cost
 	public DigitalVideoDisc(String title, String category, float cost) {
 		this();
 		this.setTitle(title);
@@ -25,13 +25,13 @@ public class DigitalVideoDisc extends Disc {
 		this.setCost(cost);
 	}
 
-	// Constructor with title, category, director, và cost
+	// Constructor with title, category, director & cost
 	public DigitalVideoDisc(String title, String category, String director, float cost) {
 		this();
 		this.setTitle(title);
 		this.setCategory(category);
 		this.setCost(cost);
-		this.setDirector(director); // Sử dụng setter từ Disc
+		this.setDirector(director); // Use setter from Disc
 	}
 
 	// Constructor with all properties

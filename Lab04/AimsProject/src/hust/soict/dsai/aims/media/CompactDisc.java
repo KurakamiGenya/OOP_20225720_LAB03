@@ -1,7 +1,5 @@
 package hust.soict.dsai.aims.media;
 
-import hust.soict.dsai.aims.media.Track;
-
 import java.util.ArrayList;
 
 public class CompactDisc extends Disc {
@@ -14,9 +12,9 @@ public class CompactDisc extends Disc {
         super(); // Call the default constructor of Disc
     }
 
-    // Constructor with basic arguments
-    public CompactDisc(String title, String category, String director, int length, float cost, String artist) {
-        super(0, title, category, cost, length, director); // Gọi constructor của Disc
+    // Constructor with basic arguments (length is not set here)
+    public CompactDisc(String title, String category, String director, float cost, String artist) {
+        super(0, title, category, cost, 0, director); // Set length to 0 temporarily
         this.artist = artist;
     }
 
@@ -40,7 +38,7 @@ public class CompactDisc extends Disc {
         }
     }
 
-    // Method getLength: Tính tổng độ dài của tất cả các track
+    // Override method getLength: Calculate the sum of length of all tracks
     @Override
     public int getLength() {
         int totalLength = 0;
@@ -55,7 +53,7 @@ public class CompactDisc extends Disc {
         return artist;
     }
 
-    // Setter for artist (nếu cần)
+    // Setter for artist (if needed)
     public void setArtist(String artist) {
         this.artist = artist;
     }
