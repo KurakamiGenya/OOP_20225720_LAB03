@@ -1,92 +1,20 @@
 package hust.soict.dsai.aims.cart;
+
 import java.util.ArrayList;
 
 import hust.soict.dsai.aims.media.DigitalVideoDisc;
+import hust.soict.dsai.aims.media.Media;
 
 public class Cart {
     // Maximum number of DVDs allowed in the cart
     public static final int MAX_NUMBERS_ORDERED = 20;
 
-    // List to store DigitalVideoDisc objects
-    private ArrayList<DigitalVideoDisc> itemsOrdered = new ArrayList<>();
-
-    // Tracks the quantity of items in the cart
-    private int qtyOrdered = 0;
-
-    // Method to add a DigitalVideoDisc to the cart
-    public void addDigitalVideoDisc(DigitalVideoDisc disc) {
-        if (qtyOrdered < MAX_NUMBERS_ORDERED) {
-            itemsOrdered.add(disc);
-            qtyOrdered++;
-            System.out.println("The disc has been added.");
-        } else {
-            System.out.println("The cart is almost full. Cannot add more items.");
-        }
-    }
-
-    // Method to add multiple DigitalVideoDiscs to the cart
-    /*
-     * public void addDigitalVideoDisc(DigitalVideoDisc[] dvdList) {
-     * for (DigitalVideoDisc disc : dvdList) {
-     * if (qtyOrdered < MAX_NUMBERS_ORDERED) {
-     * itemsOrdered.add(disc);
-     * qtyOrdered++;
-     * System.out.println("The disc \"" + disc.getTitle() + "\" has been added.");
-     * } else {
-     * System.out.println("The cart is full. Cannot add the disc \"" +
-     * disc.getTitle() + "\".");
-     * break;
-     * }
-     * }
-     * }
-     */
-
-    // Method to add an arbitrary number of DigitalVideoDiscs
-    public void addDigitalVideoDisc(DigitalVideoDisc... dvdList) {
-        for (DigitalVideoDisc disc : dvdList) {
-            if (qtyOrdered < MAX_NUMBERS_ORDERED) {
-                itemsOrdered.add(disc);
-                qtyOrdered++;
-                System.out.println("The disc \"" + disc.getTitle() + "\" has been added.");
-            } else {
-                System.out.println("The cart is full. Cannot add the disc \"" + disc.getTitle() + "\".");
-                break; // Stop adding more discs since the cart is full
-            }
-        }
-    }
-
-    // Method to add 2 DigitalVideoDiscs to the cart
-    public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
-        if (qtyOrdered < MAX_NUMBERS_ORDERED) {
-            itemsOrdered.add(dvd1);
-            qtyOrdered++;
-            System.out.println("The disc \"" + dvd1.getTitle() + "\" has been added.");
-        } else {
-            System.out.println("The cart is almost full. Cannot add more items.");
-        }
-        if (qtyOrdered < MAX_NUMBERS_ORDERED) {
-            itemsOrdered.add(dvd2);
-            qtyOrdered++;
-            System.out.println("The disc \"" + dvd2.getTitle() + "\" has been added.");
-        } else {
-            System.out.println("The cart is almost full. Cannot add more items.");
-        }
-    }
-
-    // Method to remove a DigitalVideoDisc from the cart
-    public void removeDigitalVideoDisc(DigitalVideoDisc disc) {
-        if (itemsOrdered.remove(disc)) {
-            qtyOrdered--;
-            System.out.println("The disc has been removed.");
-        } else {
-            System.out.println("The disc is not in the cart.");
-        }
-    }
+    private ArrayList<Media> itemsOrdered = new ArrayList<Media>();
 
     // Method to calculate the total cost of all DVDs in the cart
     public float totalCost() {
         float total = 0;
-        for (DigitalVideoDisc disc : itemsOrdered) {
+        for (Media disc : itemsOrdered) {
             total += disc.getCost();
         }
         return total;
@@ -107,7 +35,7 @@ public class Cart {
         System.out.println("***********************CART***********************");
         System.out.println("Ordered Items:");
         int index = 1;
-        for (DigitalVideoDisc disc : itemsOrdered) {
+        for (Media disc : itemsOrdered) {
             System.out.printf("%d. DVD - %s - %s - %s - %d: %.2f $\n",
                     index++,
                     disc.getTitle(),
@@ -122,7 +50,7 @@ public class Cart {
 
     public void findDVDById(int id) {
         boolean found = false;
-        for (DigitalVideoDisc disc : itemsOrdered) {
+        for (Media disc : itemsOrdered) {
             if (disc.getId() == id) {
                 System.out.println("DVD found:");
                 System.out.printf("ID: %d - Title: %s - Category: %s - Director: %s - Length: %d - Price: %.2f $\n",
@@ -148,7 +76,7 @@ public class Cart {
         boolean found = false;
 
         System.out.println("Search results for keywords: \"" + keywords + "\":");
-        for (DigitalVideoDisc disc : itemsOrdered) {
+        for (Media disc : itemsOrdered) {
             String titleLower = disc.getTitle().toLowerCase(); // Convert the title to lowercase
             for (String keyword : keywordArray) {
                 if (titleLower.contains(keyword)) {
