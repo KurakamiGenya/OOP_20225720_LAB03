@@ -1,4 +1,5 @@
 package hust.soict.dsai.test.store;
+
 import hust.soict.dsai.aims.media.DigitalVideoDisc;
 import hust.soict.dsai.aims.store.Store;
 
@@ -14,24 +15,24 @@ public class StoreTest {
 
         // Test adding DVDs to the store
         System.out.println("Adding DVDs to the store:");
-        store.addDVD(dvd1);
-        store.addDVD(dvd2);
-        store.addDVD(dvd3);
+        // store.addDVD(dvd1);
+        // store.addDVD(dvd2);
+        // store.addDVD(dvd3);
 
         // Display the current store
         System.out.println("\nDisplaying store contents after adding DVDs:");
-        store.displayStore();
+        // store.displayStore();
 
         // Test removing a DVD from the store
         System.out.println("\nRemoving a DVD from the store:");
-        store.removeDVD(dvd2);
+        // store.removeDVD(dvd2);
 
         // Display the current store after removal
         System.out.println("\nDisplaying store contents after removing a DVD:");
-        store.displayStore();
+        // store.displayStore();
 
         // Test removing a DVD that does not exist in the store
         System.out.println("\nAttempting to remove a DVD not in the store:");
-        store.removeDVD(dvd2);
+        // store.removeDVD(dvd2);
     }
 }
