@@ -23,6 +23,31 @@ public class Book extends Media {
 		}
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("ID: ")
+				.append(this.getId())
+				.append(" - Title: ")
+				.append(this.getTitle())
+				.append(getId())
+				.append(" - Category: ")
+				.append(this.getCategory())
+				.append(" - Authors: ");
+
+		for (String author : authors) {
+			sb.append(author);
+			if (!author.equals(authors.get(authors.size() - 1))) {
+				sb.append(", ");
+			}
+		}
+
+		sb.append(" - Cost: ")
+				.append(getCost());
+
+		return sb.toString();
+	}
+
 	public Book() {
 		// TODO Auto-generated constructor stub
 	}
