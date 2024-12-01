@@ -7,7 +7,6 @@ public class Track implements Playable {
 
     // Default constructor
     public Track() {
-
     }
 
     // Constructor with full arguments
@@ -32,4 +31,22 @@ public class Track implements Playable {
         System.out.println("Track length: " + this.getLength());
     }
 
+    // Override equals with argument of type Track
+    public boolean equals(Track track) {
+        // Kiểm tra nếu track là null
+        if (track == null) {
+            return false;
+        }
+
+        // So sánh thuộc tính title và length
+        return this.title != null && this.title.equals(track.getTitle()) && this.length == track.getLength();
+    }
+
+    @Override
+    public int hashCode() {
+        // Đảm bảo consistency giữa equals() và hashCode()
+        int result = (title != null) ? title.hashCode() : 0;
+        result = 31 * result + length;
+        return result;
+    }
 }

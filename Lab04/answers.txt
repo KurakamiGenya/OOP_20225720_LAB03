@@ -1,103 +1,245 @@
-Is JAVA a Pass by Value or a Pass by Reference programming language?
+Which classes are aggregates of other classes? Checking all constructors of whole classes if they initialize for their parts?
 
-Java is "pass-by-value", but this can sometimes be confusing due to how it handles objects. Here's a detailed breakdown:
+Cart aggregates Media:
+- Cart has an attribute itemsOrdered which is an ArrayList<Media>.
+- The constructor of Cart initializes itemsOrdered.
 
-- Primitive Types:
-For primitive data types like `int`, `float`, `boolean`, etc., Java is straightforward. The actual value is passed to the method, meaning the method works on a copy of the data. Changes to the parameter inside the method do not affect the original value.
+Store aggregates Media:
+- Store has an attribute itemsInStore which is an ArrayList<Media>.
+- The constructor of Store initializes itemsInStore.
 
-Example:
-```java
-void modifyPrimitive(int value) {
-    value = 10;
-}
-
-public static void main(String[] args) {
-    int x = 5;
-    modifyPrimitive(x);
-    System.out.println(x); // Output: 5
-}
-```
-
-The value of `x` remains unchanged because a copy of `x` was passed to the method.
-
----
-
-- Objects:
-For objects, Java still uses "pass-by-value", but the value being passed is a "reference to the object", not the object itself. This means:
-+ You can change the object's state (its fields) within the method, and those changes will reflect in the original object.
-+ However, if you try to reassign the reference itself within the method, it won’t affect the original reference outside the method.
-
-Example:
-```java
-class MyObject {
-    int value;
-}
-
-void modifyObject(MyObject obj) {
-    obj.value = 10; // Modifies the object's state
-    obj = new MyObject(); // Changes the reference locally
-    obj.value = 20;
-}
-
-public static void main(String[] args) {
-    MyObject obj = new MyObject();
-    obj.value = 5;
-    modifyObject(obj);
-    System.out.println(obj.value); // Output: 10
-}
-```
-
-Here:
-+ The `obj.value` field was changed to `10`, and this change is visible outside the method because the method was operating on the original object via its reference.
-+ However, reassigning `obj` to a new object (`new MyObject()`) inside the method did not affect the original reference outside the method.
-
----
-
-- Why Java is Not Pass-by-Reference?
-In "pass-by-reference", the method would have direct access to the caller's variable, and reassigning the reference in the method would also change the original reference outside the method. Java doesn't do this.
-
-Example (Pass-by-Reference, Hypothetical):
-```java
-void modifyReference(int[] arr) {
-    arr = new int[]{5, 6, 7};
-}
-
-public static void main(String[] args) {
-    int[] array = {1, 2, 3};
-    modifyReference(array);
-    System.out.println(array[0]); // In a pass-by-reference model, this would output 5
-}
-```
-
-In Java, the above won't modify the original `array` reference; the method only changes its local copy of the reference.
-
----
-
-- Conclusion
-Java is strictly **pass-by-value**:
-+ For primitives, the value is copied.
-+ For objects, the reference (pointer) to the object is copied, but the object itself is not.
+CompactDisc aggregates Track:
+- CompactDisc has an attribute tracks which is an ArrayList<Track>.
+- The constructor of CompactDisc initializes tracks.
 
 -----***-----
 
-After the call of `swap(jungleDVD, cinderellaDVD`)`, why does the title of these two objects still remain?
+Write constructors for parent and child classes. Remove redundant setter methods if any
 
-The `swap` method does not actually swap the two objects in the caller because Java uses "pass-by-value". When `swap(jungleDVD, cinderellaDVD)` is called:
-- The references to `jungleDVD` and `cinderellaDVD` are passed BY VALUE to the method.
-- Inside the `swap` method, the local variables `o1` and `o2` are swapped, but this has no effect on the original references (`jungleDVD` and `cinderellaDVD`) in the `main` method.
+Media Class:
 
-Thus, the `swap` method only changes the local references within its scope. The original references in `main` remain unchanged, and as a result, the titles of the two objects are unaffected.
+```java
+public class Media {
+    private int id;
+    private String title;
+    private String category;
+    private float cost;
 
----
+    public Media(int id, String title, String category, float cost) {
+        this.id = id;
+        this.title = title;
+        this.category = category;
+        this.cost = cost;
+    }
 
-And after the call of `changeTitle(jungleDVD, cinderellaDVD.getTitle())`, why is the title of the JungleDVD changed?
+    public int getId() {
+        return id;
+    }
 
-The `changeTitle` method operates on the `jungleDVD` object directly because the reference to `jungleDVD` is passed (by value) to the method. Here's what happens:
-- Inside `changeTitle`, the `setTitle` method is called on the `jungleDVD` object, which modifies its title. This is because the method has access to the actual object via the copied reference.
-- Reassigning the local variable `dvd` to a new object (`new DigitalVideoDisc(oldTitle)`) does not affect the original reference `jungleDVD` in `main`. However, the modification made to the title (`dvd.setTitle(title)`) persists because it changes the state of the original object.
+    public String getTitle() {
+        return title;
+    }
 
----
+    public String getCategory() {
+        return category;
+    }
 
-In summary:
-- The `jungleDVD` object's title is modified because `setTitle` directly updates its internal state.
-- The reassignment of the local variable `dvd` to a new object only changes the local reference and does not affect the original reference in the caller.
+    public float getCost() {
+        return cost;
+    }
+}
+```
+
+Disc Class (Child of Media):
+
+```
+public class Disc extends Media {
+    private int length;
+    private String director;
+
+    public Disc(int id, String title, String category, float cost, int length, String director) {
+        super(id, title, category, cost);
+        this.length = length;
+        this.director = director;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+}
+```
+
+DigitalVideoDisc Class (Child of Disc):
+
+```java
+public class DigitalVideoDisc extends Disc {
+    private static int nbDigitalVideoDiscs = 0;
+
+    public DigitalVideoDisc(int id, String title, String category, String director, int length, float cost) {
+        super(id, title, category, cost, length, director);
+        nbDigitalVideoDiscs++;
+    }
+
+    public void play() {
+        // Implementation of play method
+    }
+}
+```
+
+Book Class (Child of Media):
+
+```java
+public class Book extends Media {
+    private List<String> authors;
+
+    public Book(int id, String title, String category, float cost) {
+        super(id, title, category, cost);
+        this.authors = new ArrayList<>();
+    }
+
+    public void addAuthor(String authorName) {
+        authors.add(authorName);
+    }
+
+    public void removeAuthor(String authorName) {
+        authors.remove(authorName);
+    }
+}
+```
+
+CompactDisc Class (Child of Disc):
+
+```java
+public class CompactDisc extends Disc {
+    private String artist;
+    private List<Track> tracks;
+
+    public CompactDisc(int id, String title, String category, String director, int length, float cost, String artist) {
+        super(id, title, category, cost, length, director);
+        this.artist = artist;
+        this.tracks = new ArrayList<>();
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public void setArtist(String artist) {
+        this.artist = artist;
+    }
+
+    public void addTrack(Track track) {
+        tracks.add(track);
+    }
+
+    public void removeTrack(Track track) {
+        tracks.remove(track);
+    }
+
+    public void play() {
+        // Implementation of play method
+    }
+}
+```
+
+Track Class:
+
+```java
+public class Track {
+    private String title;
+    private int length;
+
+    public Track(String title, int length) {
+        this.title = title;
+        this.length = length;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public void play() {
+        // Implementation of play method
+    }
+}
+```
+
+Cart Class:
+
+```java
+public class Cart {
+    public static final int MAX_NUMBERS_ORDERED = 20;
+    private List<Media> itemsOrdered;
+
+    public Cart() {
+        this.itemsOrdered = new ArrayList<>();
+    }
+
+    public void addMedia(Media media) {
+        if (itemsOrdered.size() < MAX_NUMBERS_ORDERED) {
+            itemsOrdered.add(media);
+        }
+    }
+
+    public void removeMedia(Media media) {
+        itemsOrdered.remove(media);
+    }
+}
+```
+
+-----***-----
+
+When overriding the equals() method of the Object class, you will have to cast the Object parameter obj to the type of Object that you are dealing with. For example, in the Media class, you must cast the Object obj to a Media, and then check the equality of the two objects’ attributes as the above requirements (i.e. title for Media; title and length for Track). If the passing object is not an instance of Media, what happens?
+
+If the passing object is not an instance of Media, attempting to cast it to Media will result in a ClassCastException at runtime. This is because the Java runtime system performs a check to ensure that the cast is valid. If it isn't, it throws the exception.
+
+To avoid this exception and handle the situation gracefully, you should first check whether the object is an instance of Media using the instanceof operator before performing the cast. Here's how you can safely override the equals() method in the Media class:
+
+```java
+@Override
+public boolean equals(Object obj) {
+    // Check if obj is null
+    if (obj == null) {
+        return false;
+    }
+
+    // Check if obj is an instance of Media
+    if (!(obj instanceof Media)) {
+        return false;
+    }
+
+    // Cast obj to Media
+    Media media = (Media) obj;
+
+    // Compare the title attribute
+    return this.title != null && this.title.equals(media.getTitle());
+}
+```
+
+Key Points:
+1. instanceof Check:
+   - Ensures that the object can be safely cast to Media.
+   - If the object is not of type Media, instanceof returns false, and no casting occurs.
+
+2. Return false for Non-Media Objects:
+   - If the object is not a Media, it's logically not equal to any Media instance, so the method returns false.
+
+3. Graceful Handling:
+   - Prevents runtime exceptions (ClassCastException) and ensures robust behavior.
+
+Example Behavior:
+- If obj is of type String and you pass it to equals(), the method will check if (!(obj instanceof Media)) and return false without attempting a cast.
+- If obj is null, the method will return false without proceeding to further checks.
+
+By using this safe implementation, you align with Java best practices for overriding equals() in a polymorphic way.
+
+-----***-----
+
