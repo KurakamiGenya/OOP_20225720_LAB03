@@ -49,8 +49,8 @@ public abstract class Media {
 			return false;
 		}
 
-		// Compare the title attribute
-		return this.title != null && this.title.equals(media.getTitle());
+		// Compare the id & title attributes
+		return this.id == media.getId() && this.title != null && this.title.equals(media.getTitle());
 	}
 
 	@Override
