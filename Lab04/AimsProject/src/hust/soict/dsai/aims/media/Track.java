@@ -33,12 +33,12 @@ public class Track implements Playable {
 
     // Override equals with argument of type Track
     public boolean equals(Track track) {
-        // Kiểm tra nếu track là null
+        // Check if the track is null
         if (track == null) {
             return false;
         }
 
-        // So sánh thuộc tính title và length
+        // Compare the attributes title & length
         return this.title != null && this.title.equals(track.getTitle()) && this.length == track.getLength();
     }
 
