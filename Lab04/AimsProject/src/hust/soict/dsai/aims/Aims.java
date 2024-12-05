@@ -1,7 +1,10 @@
 package hust.soict.dsai.aims;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import hust.soict.dsai.aims.cart.Cart;
-import hust.soict.dsai.aims.media.DigitalVideoDisc;
+import hust.soict.dsai.aims.media.*;
 
 public class Aims {
 
@@ -10,34 +13,52 @@ public class Aims {
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Cart anOrder = new Cart();
+		/*
+		 * // TODO Auto-generated method stub
+		 * Cart anOrder = new Cart();
+		 * 
+		 * DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation",
+		 * "Roger Allers", 87, 19.95f);
+		 * // anOrder.addDigitalVideoDisc(dvd1);
+		 * DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars", "Science Fiction",
+		 * "George Lucas", 87, 24.95f);
+		 * // anOrder.addDigitalVideoDisc(dvd2);
+		 * DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladin", "Animation", 18.99f);
+		 * // anOrder.addDigitalVideoDisc(dvd3);
+		 * 
+		 * System.out.println("Total Cost is: ");
+		 * System.out.println(anOrder.totalCost());
+		 * 
+		 * // Display the cart before removal
+		 * System.out.println("\n--- Cart before removing a disc ---");
+		 * // anOrder.displayCart();
+		 * 
+		 * // Test removing an existing DVD (Star Wars)
+		 * System.out.println("\nTrying to remove 'Star Wars'...");
+		 * // anOrder.removeDigitalVideoDisc(dvd2);
+		 * 
+		 * // Display the cart after removing the DVD
+		 * System.out.println("\n--- Cart after removing 'Star Wars' ---");
+		 * // anOrder.displayCart();
+		 * 
+		 * // Test removing a non-existent DVD (should display a message)
+		 * System.out.println("\nTrying to remove 'Star Wars' again...");
+		 * // anOrder.removeDigitalVideoDisc(dvd2);
+		 */
 
-		DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.95f);
-		// anOrder.addDigitalVideoDisc(dvd1);
-		DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars", "Science Fiction", "George Lucas", 87, 24.95f);
-		// anOrder.addDigitalVideoDisc(dvd2);
-		DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladin", "Animation", 18.99f);
-		// anOrder.addDigitalVideoDisc(dvd3);
+		List<Media> mediae = new ArrayList<Media>();
 
-		System.out.println("Total Cost is: ");
-		System.out.println(anOrder.totalCost());
+		CompactDisc cd = new CompactDisc("LK Nhac tre", "Pop", "VA", (float) 8.50, "VA");
+		DigitalVideoDisc dvd = new DigitalVideoDisc("The gioi dong vat");
+		Book book = new Book(0, "Dac Nhan Tam", "Self-help", (float) 11.75);
 
-		// Display the cart before removal
-		System.out.println("\n--- Cart before removing a disc ---");
-		// anOrder.displayCart();
+		mediae.add(cd);
+		mediae.add(dvd);
+		mediae.add(book);
 
-		// Test removing an existing DVD (Star Wars)
-		System.out.println("\nTrying to remove 'Star Wars'...");
-		// anOrder.removeDigitalVideoDisc(dvd2);
-
-		// Display the cart after removing the DVD
-		System.out.println("\n--- Cart after removing 'Star Wars' ---");
-		// anOrder.displayCart();
-
-		// Test removing a non-existent DVD (should display a message)
-		System.out.println("\nTrying to remove 'Star Wars' again...");
-		// anOrder.removeDigitalVideoDisc(dvd2);
+		for (Media m : mediae) {
+			System.out.println(m.toString());
+		}
 	}
 
 }

@@ -32,4 +32,11 @@ public class Track implements Playable {
         System.out.println("Track length: " + this.getLength());
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        return sb.toString();
+    }
+
 }

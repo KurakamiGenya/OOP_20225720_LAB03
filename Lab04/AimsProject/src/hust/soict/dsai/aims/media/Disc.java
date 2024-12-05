@@ -18,8 +18,8 @@ public class Disc extends Media {
         this.setTitle(title);
         this.setCategory(category);
         this.setCost(cost);
-        this.length = length;
-        this.director = director;
+        this.setLength(length);
+        this.setDirector(director);
     }
 
     // Getter for length
@@ -40,5 +40,18 @@ public class Disc extends Media {
     // Setter for director
     public void setDirector(String director) {
         this.director = director;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(super.toString())
+                .append(" - Length: ")
+                .append(this.getLength())
+                .append(" - Director: ")
+                .append(this.getDirector());
+
+        return sb.toString();
     }
 }

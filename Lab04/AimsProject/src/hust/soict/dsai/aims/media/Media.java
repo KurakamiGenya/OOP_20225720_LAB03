@@ -43,4 +43,18 @@ public abstract class Media {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("ID: ")
+				.append(this.getId())
+				.append(" - Title: ")
+				.append(this.getTitle())
+				.append(" - Category: ")
+				.append(this.getCategory());
+
+		return sb.toString();
+	}
+
 }
