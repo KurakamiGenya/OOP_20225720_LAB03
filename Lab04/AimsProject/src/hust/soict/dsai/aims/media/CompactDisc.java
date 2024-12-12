@@ -70,4 +70,17 @@ public class CompactDisc extends Disc implements Playable {
             track.play(); // Call play() of each Track
         }
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(super.toString())
+                .append(" - Artist: ")
+                .append(this.getArtist())
+                .append(" - Cost: ")
+                .append(this.getCost());
+
+        return sb.toString();
+    }
 }

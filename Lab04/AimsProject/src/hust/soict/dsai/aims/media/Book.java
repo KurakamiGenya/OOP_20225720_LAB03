@@ -23,8 +23,25 @@ public class Book extends Media {
 		}
 	}
 
-	public Book() {
-		// TODO Auto-generated constructor stub
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(super.toString())
+				.append(" - Authors: ")
+				.append(String.join(", ", authors))
+				.append(" - Cost: ")
+				.append(this.getCost());
+
+		return sb.toString();
+	}
+
+	public Book(int id, String title, String category, float cost) {
+		super();
+		this.setId(id);
+		this.setTitle(title);
+		this.setCategory(category);
+		this.setCost(cost);
 	}
 
 }

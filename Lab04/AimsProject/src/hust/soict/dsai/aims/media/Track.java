@@ -49,4 +49,12 @@ public class Track implements Playable {
         result = 31 * result + length;
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        return sb.toString();
+    }
+
 }

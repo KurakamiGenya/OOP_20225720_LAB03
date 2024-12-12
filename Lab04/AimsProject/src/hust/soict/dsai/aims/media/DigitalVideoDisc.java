@@ -50,4 +50,15 @@ public class DigitalVideoDisc extends Disc implements Playable {
 		System.out.println("DVD length: " + this.getLength());
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(super.toString())
+				.append(" - Cost: ")
+				.append(this.getCost());
+
+		return sb.toString();
+	}
+
 }

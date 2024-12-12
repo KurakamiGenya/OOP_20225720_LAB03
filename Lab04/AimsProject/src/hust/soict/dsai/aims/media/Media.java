@@ -58,4 +58,19 @@ public abstract class Media {
 		// Ensure the consistency between equals() & hashCode()
 		return title != null ? title.hashCode() : 0;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("ID: ")
+				.append(this.getId())
+				.append(" - Title: ")
+				.append(this.getTitle())
+				.append(" - Category: ")
+				.append(this.getCategory());
+
+		return sb.toString();
+	}
+
 }
