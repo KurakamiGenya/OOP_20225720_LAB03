@@ -40,7 +40,23 @@ public abstract class Media {
 	}
 
 	public Media() {
-		// TODO Auto-generated constructor stub
+		// Default constructor
+	}
+
+	public boolean equals(Media media) {
+		// Check if media is null
+		if (media == null) {
+			return false;
+		}
+
+		// Compare the id & title attributes
+		return this.id == media.getId() && this.title != null && this.title.equals(media.getTitle());
+	}
+
+	@Override
+	public int hashCode() {
+		// Ensure the consistency between equals() & hashCode()
+		return title != null ? title.hashCode() : 0;
 	}
 
 	@Override
