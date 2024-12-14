@@ -22,6 +22,15 @@ public class Store {
         }
     }
 
+    public Media findMediaByTitle(String title) {
+        for (Media media : itemsInStore) {
+            if (media.getTitle().equalsIgnoreCase(title)) {
+                return media;
+            }
+        }
+        return null;
+    }
+
     // Method to display the list of DVDs in the store
     /*
      * public void displayStore() {

@@ -40,10 +40,15 @@ public class Cart {
     }
 
     public void printCart() {
-        System.out.println("Current cart:");
-        for (Media media : itemsOrdered) {
-            System.out.println(media.toString());
+        System.out.println("******************* CART *******************");
+        if (itemsOrdered.isEmpty()) {
+            System.out.println("The cart is empty");
+        } else {
+            for (Media media : itemsOrdered) {
+                System.out.println(media.toString());
+            }
         }
+        System.out.println("********************************************");
     }
 
     public void sortByCostTitle() {
@@ -60,6 +65,45 @@ public class Cart {
         for (Media media : itemsOrdered) {
             System.out.println(media.toString());
         }
+    }
+
+    public Media findMediaByTitle(String title) {
+        for (Media media : itemsOrdered) {
+            if (media.getTitle().equalsIgnoreCase(title)) {
+                return media;
+            }
+        }
+        return null;
+    }
+
+    public void filterById(int id) {
+        boolean found = false;
+        for (Media media : itemsOrdered) {
+            if (media.getId() == id) {
+                System.out.println(media.toString());
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No media found with ID: " + id);
+        }
+    }
+
+    public void filterByTitle(String title) {
+        boolean found = false;
+        for (Media media : itemsOrdered) {
+            if (media.getTitle().equalsIgnoreCase(title)) {
+                System.out.println(media.toString());
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No media found with title: " + title);
+        }
+    }
+
+    public void clearCart() {
+        itemsOrdered.clear();
     }
 
     // Method to display the current cart status
