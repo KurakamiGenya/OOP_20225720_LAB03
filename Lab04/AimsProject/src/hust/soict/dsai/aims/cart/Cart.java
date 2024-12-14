@@ -1,6 +1,7 @@
 package hust.soict.dsai.aims.cart;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 //import hust.soict.dsai.aims.media.DigitalVideoDisc;
 import hust.soict.dsai.aims.media.Media;
@@ -36,6 +37,29 @@ public class Cart {
             total += media.getCost();
         }
         return total;
+    }
+
+    public void printCart() {
+        System.out.println("Current cart:");
+        for (Media media : itemsOrdered) {
+            System.out.println(media.toString());
+        }
+    }
+
+    public void sortByCostTitle() {
+        Collections.sort(itemsOrdered, Media.COMPARE_BY_COST_TITLE);
+        System.out.println("Cart sorted by cost (descending) then title:");
+        for (Media media : itemsOrdered) {
+            System.out.println(media.toString());
+        }
+    }
+
+    public void sortByTitleCost() {
+        Collections.sort(itemsOrdered, Media.COMPARE_BY_TITLE_COST);
+        System.out.println("Cart sorted by title (alphabet) then cost:");
+        for (Media media : itemsOrdered) {
+            System.out.println(media.toString());
+        }
     }
 
     // Method to display the current cart status

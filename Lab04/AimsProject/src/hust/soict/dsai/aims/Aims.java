@@ -46,19 +46,58 @@ public class Aims {
 		 * // anOrder.removeDigitalVideoDisc(dvd2);
 		 */
 
-		List<Media> mediae = new ArrayList<Media>();
+		/*
+		 * List<Media> mediae = new ArrayList<Media>();
+		 * 
+		 * CompactDisc cd = new CompactDisc("LK Nhac tre", "Pop", "VA", (float) 8.50,
+		 * "VA");
+		 * DigitalVideoDisc dvd = new DigitalVideoDisc("The gioi dong vat");
+		 * Book book = new Book(0, "Dac Nhan Tam", "Self-help", (float) 11.75);
+		 * 
+		 * mediae.add(cd);
+		 * mediae.add(dvd);
+		 * mediae.add(book);
+		 * 
+		 * for (Media m : mediae) {
+		 * System.out.println(m.toString());
+		 * }
+		 */
 
-		CompactDisc cd = new CompactDisc("LK Nhac tre", "Pop", "VA", (float) 8.50, "VA");
-		DigitalVideoDisc dvd = new DigitalVideoDisc("The gioi dong vat");
-		Book book = new Book(0, "Dac Nhan Tam", "Self-help", (float) 11.75);
+		Cart cart = new Cart();
 
-		mediae.add(cd);
-		mediae.add(dvd);
-		mediae.add(book);
+		Media media1 = new Media() {
+			{
+				setId(1);
+				setTitle("The Matrix");
+				setCategory("Sci-Fi");
+				setCost(15.99f);
+			}
+		};
+		Media media2 = new Media() {
+			{
+				setId(2);
+				setTitle("Avengers");
+				setCategory("Action");
+				setCost(20.99f);
+			}
+		};
+		Media media3 = new Media() {
+			{
+				setId(3);
+				setTitle("The Matrix");
+				setCategory("Sci-Fi");
+				setCost(10.99f);
+			}
+		};
 
-		for (Media m : mediae) {
-			System.out.println(m.toString());
-		}
+		cart.addMedia(media1);
+		cart.addMedia(media2);
+		cart.addMedia(media3);
+
+		cart.printCart();
+
+		cart.sortByCostTitle();
+		cart.sortByTitleCost();
 	}
 
 }

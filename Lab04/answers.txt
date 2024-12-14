@@ -243,3 +243,87 @@ By using this safe implementation, you align with Java best practices for overri
 
 -----***-----
 
+What class should implement the Comparable interface?
+
+The Media class should implement the Comparable interface. Since Media is the base class for all types of media (e.g., DVDs, CDs), implementing Comparable here will ensure that all subclasses inherit this ordering behavior unless they override it.
+
+-----***-----
+
+In those classes, how should you implement the compareTo() method to reflect the ordering that we want?
+
+To reflect the desired ordering, the compareTo() method in the Media class can implement either:
+
+- Ordering by title, then cost:
+```java
+@Override
+public int compareTo(Media other) {
+    int titleComparison = this.title.compareToIgnoreCase(other.title);
+    if (titleComparison != 0) {
+        return titleComparison;
+    }
+    return Float.compare(this.cost, other.cost);
+}
+```
+
+- Ordering by cost, then title:
+```java
+@Override
+public int compareTo(Media other) {
+    int costComparison = Float.compare(other.cost, this.cost); // Descending cost
+    if (costComparison != 0) {
+        return costComparison;
+    }
+    return this.title.compareToIgnoreCase(other.title); // Ascending title
+}
+```
+
+However, since the Comparable interface supports only one ordering rule, we cannot directly have both rules simultaneously using this approach.
+
+-----***-----
+
+Can we have two ordering rules of the item (by title then cost and by cost then title) if we use this Comparable interface approach?
+
+No, we cannot have two ordering rules using the Comparable interface because a class implementing Comparable can only define a single natural ordering via the compareTo() method.
+
+To achieve multiple ordering rules, we must rely on the Comparator interface instead, as it allows us to define multiple comparison logic and pass the desired comparator dynamically when sorting.
+
+-----***-----
+
+Suppose DVDs have a different ordering rule from the other media types, that is by title, then decreasing length, then cost. How would you modify your code to allow this?
+
+If DVDs require a specific ordering rule, we can override the compareTo() method in the DigitalVideoDisc subclass (assuming DVDs are represented by this class). The subclass-specific logic would ensure that DVDs are sorted differently while other media types use the Media class's natural ordering.
+
+Here is how the compareTo() method in the DigitalVideoDisc class would look:
+
+```java
+package hust.soict.dsai.aims.media;
+
+public class DigitalVideoDisc extends Media {
+    private int length;
+
+    // Getter and setter for length...
+
+    @Override
+    public int compareTo(Media other) {
+        if (other instanceof DigitalVideoDisc) {
+            DigitalVideoDisc otherDvd = (DigitalVideoDisc) other;
+            int titleComparison = this.getTitle().compareToIgnoreCase(otherDvd.getTitle());
+            if (titleComparison != 0) {
+                return titleComparison;
+            }
+            int lengthComparison = Integer.compare(otherDvd.getLength(), this.getLength()); // Descending length
+            if (lengthComparison != 0) {
+                return lengthComparison;
+            }
+            return Float.compare(this.getCost(), otherDvd.getCost()); // Ascending cost
+        }
+        return super.compareTo(other); // Use default Media comparison for non-DVD types
+    }
+}
+```
+
+In this way:
+- DVDs have their own ordering logic based on title, decreasing length, and then cost.
+- Other media types follow the default ordering defined in the Media class.
+
+To sort the cart, the itemsOrdered list can still use Collections.sort() directly because the compareTo() method is defined appropriately in each class.
