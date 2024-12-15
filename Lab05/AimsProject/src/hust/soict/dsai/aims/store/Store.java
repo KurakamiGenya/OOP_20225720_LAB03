@@ -31,6 +31,10 @@ public class Store {
         return null;
     }
 
+    public ArrayList<Media> getItemsInStore() {
+        return new ArrayList<>(itemsInStore);
+    }
+
     // Method to display the list of DVDs in the store
     /*
      * public void displayStore() {
