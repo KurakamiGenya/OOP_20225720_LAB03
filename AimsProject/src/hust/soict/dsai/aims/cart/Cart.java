@@ -2,15 +2,18 @@ package hust.soict.dsai.aims.cart;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Observable;
 
 //import hust.soict.dsai.aims.media.DigitalVideoDisc;
 import hust.soict.dsai.aims.media.Media;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Cart {
     // Maximum number of DVDs allowed in the cart
     public static final int MAX_NUMBERS_ORDERED = 20;
 
-    private ArrayList<Media> itemsOrdered = new ArrayList<Media>();
+    private ObservableList<Media> itemsOrdered = FXCollections.observableArrayList();
 
     public void addMedia(Media media) {
         if (!itemsOrdered.contains(media)) {
@@ -104,6 +107,10 @@ public class Cart {
 
     public void clearCart() {
         itemsOrdered.clear();
+    }
+
+    public ObservableList<Media> getItemsOrdered() {
+        return this.itemsOrdered;
     }
 
     // Method to display the current cart status
