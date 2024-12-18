@@ -80,8 +80,8 @@
             </TableView>
             <ButtonBar prefHeight="40.0" prefWidth="200.0">
               <buttons>
-                <Button mnemonicParsing="false" text="Play" />
-                  <Button layoutX="949.0" layoutY="18.0" mnemonicParsing="false" text="Remove" />
+                <Button mnemonicParsing="false" text="Play" fx:id="btnPlay"/>
+                  <Button layoutX="949.0" layoutY="18.0" mnemonicParsing="false" text="Remove" fx:id="btnRemove"/>
               </buttons>
             </ButtonBar>
          </children>

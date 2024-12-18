@@ -1,6 +1,6 @@
 package hust.soict.dsai.lab01;
+
 import javax.swing.*;
-import java.util.InputMismatchException;
 
 public class EquationSolver {
 

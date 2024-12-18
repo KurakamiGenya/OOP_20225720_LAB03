@@ -1,7 +1,5 @@
 package hust.soict.dsai.aims;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import hust.soict.dsai.aims.cart.Cart;
