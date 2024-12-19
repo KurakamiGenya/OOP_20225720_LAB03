@@ -3,19 +3,17 @@ package hust.soict.dsai.aims.screen;
 import hust.soict.dsai.aims.cart.Cart;
 import hust.soict.dsai.aims.media.Media;
 import hust.soict.dsai.aims.media.Playable;
+import javafx.collections.transformation.FilteredList;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class CartScreenController {
     private Cart cart;
+    private FilteredList<Media> filteredMedia;
 
     @FXML
     private Button btnPlay;
@@ -54,7 +52,10 @@ public class CartScreenController {
         colMediaTitle.setCellValueFactory(new PropertyValueFactory<Media, String>("title"));
         colMediacategory.setCellValueFactory(new PropertyValueFactory<Media, String>("category"));
         colMediaCost.setCellValueFactory(new PropertyValueFactory<Media, Float>("cost"));
-        tblMedia.setItems(this.cart.getItemsOrdered());
+
+        // Wrap cart items in a FilteredList
+        filteredMedia = new FilteredList<>(this.cart.getItemsOrdered(), p -> true);
+        tblMedia.setItems(filteredMedia);
 
         btnPlay.setVisible(false);
         btnRemove.setVisible(false);
@@ -86,7 +87,17 @@ public class CartScreenController {
     }
 
     void showFilteredMedia(String mediaString) {
-        // Implement by self
+        if (mediaString == null || mediaString.isEmpty()) {
+            filteredMedia.setPredicate(media -> true); // Show all items
+        } else {
+            String lowerCaseFilter = mediaString.toLowerCase();
+            if (radioBtnFilterId.isSelected()) {
+                filteredMedia
+                        .setPredicate(media -> String.valueOf(media.getId()).toLowerCase().contains(lowerCaseFilter));
+            } else if (radioBtnFilterTitle.isSelected()) {
+                filteredMedia.setPredicate(media -> media.getTitle().toLowerCase().contains(lowerCaseFilter));
+            }
+        }
     }
 
     @FXML
