@@ -8,8 +8,10 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class CartScreenController {
@@ -20,6 +22,15 @@ public class CartScreenController {
 
     @FXML
     private Button btnRemove;
+
+    @FXML
+    private TextField tfFilter;
+
+    @FXML
+    private RadioButton radioBtnFilterId;
+
+    @FXML
+    private RadioButton radioBtnFilterTitle;
 
     @FXML
     private TableView<Media> tblMedia;
@@ -56,6 +67,13 @@ public class CartScreenController {
                 }
             }
         });
+
+        tfFilter.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                showFilteredMedia(newValue);
+            }
+        });
     }
 
     void updateButtonBar(Media media) {
@@ -65,6 +83,10 @@ public class CartScreenController {
         } else {
             btnPlay.setVisible(false);
         }
+    }
+
+    void showFilteredMedia(String mediaString) {
+        // Implement by self
     }
 
     @FXML
